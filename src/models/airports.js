@@ -1,4 +1,4 @@
-import apis from '../apis'
+import apis from '../apis/index.js'
 
 const Airports = () => {
   return {

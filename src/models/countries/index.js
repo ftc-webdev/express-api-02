@@ -1,4 +1,4 @@
-import countriesJson from './countries.json'
+import countriesJson from './countries.json' assert { type: "json" }
 
 const Countries = (json)  => {
   	const data = json
