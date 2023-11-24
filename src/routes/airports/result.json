@@ -1,0 +1,97 @@
+{
+  "data": [
+    {
+      "id": 3447404,
+      "wikiDataId": "Q5170859",
+      "type": "CITY",
+      "city": "Corkery",
+      "name": "Corkery",
+      "country": "Canada",
+      "countryCode": "CA",
+      "region": "Ontario",
+      "regionCode": "ON",
+      "regionWdId": "Q1904",
+      "latitude": 45.2845,
+      "longitude": -76.1036,
+      "population": 0
+    },
+    {
+      "id": 3215933,
+      "wikiDataId": "Q5170857",
+      "type": "CITY",
+      "city": "Corkey",
+      "name": "Corkey",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "region": "Northern Ireland",
+      "regionCode": "NIR",
+      "regionWdId": "Q26",
+      "latitude": 55.061,
+      "longitude": -6.306,
+      "population": 0
+    },
+    {
+      "id": 3453266,
+      "wikiDataId": "Q36647",
+      "type": "CITY",
+      "city": "Cork",
+      "name": "Cork",
+      "country": "Ireland",
+      "countryCode": "IE",
+      "region": "Munster",
+      "regionCode": "M",
+      "regionWdId": "Q131438",
+      "latitude": 51.9,
+      "longitude": -8.473055555,
+      "population": 222333
+    },
+    {
+      "id": 3710193,
+      "wikiDataId": "Q162475",
+      "type": "ADM2",
+      "city": "County Cork",
+      "name": "County Cork",
+      "country": "Ireland",
+      "countryCode": "IE",
+      "region": "Munster",
+      "regionCode": "M",
+      "regionWdId": "Q131438",
+      "latitude": 51.966666666,
+      "longitude": -8.583333333,
+      "population": 542196
+    },
+    {
+      "id": 3213754,
+      "wikiDataId": "Q5170738",
+      "type": "CITY",
+      "city": "Cork",
+      "name": "Cork",
+      "country": "United States of America",
+      "countryCode": "US",
+      "region": "Kentucky",
+      "regionCode": "KY",
+      "regionWdId": "Q1603",
+      "latitude": 37.0375,
+      "longitude": -85.5833,
+      "population": 0
+    }
+  ],
+  "links": [
+    {
+      "rel": "first",
+      "href": "/v1/geo/cities?offset=0&limit=5&namePrefix=cork"
+    },
+    {
+      "rel": "next",
+      "href": "/v1/geo/cities?offset=5&limit=5&namePrefix=cork"
+    },
+    {
+      "rel": "last",
+      "href": "/v1/geo/cities?offset=0&limit=5&namePrefix=cork"
+    }
+  ],
+  "metadata": {
+    "currentOffset": 0,
+    "totalCount": 9
+  }
+}

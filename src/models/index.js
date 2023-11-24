@@ -9,11 +9,13 @@
 import countries from './countries/index.js' // import index.js from countries folder
 import airlines from './airlines.js'
 import airports from './airports.js'
+import airportSearch from './airports/index.js'
 
 const models = {
   countries,
   airlines,
   airports,
+  airportSearch,
 }
 
 export default models
