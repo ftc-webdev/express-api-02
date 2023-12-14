@@ -24,10 +24,23 @@ routes(app)
 const urlPath = path.join(__dirname, '..', 'public')
 
 app.use(express.static(urlPath));
-
+/*
+  handle the static website as well as the api paths
+*/
 app.get('/*', function (req, res) {
   res.sendFile(path.join(urlPath, 'index.html'));
 })
+/*
+  the app error handler
+*/
+// app.use((err, req, res, next) => {
+//   try {
+//     console.log("App Error", err)
+//     res.send(err)  
+//   } catch(e) {
+//     res.send("App Catch", e)  
+//   }
+// })
 
 
 export default app

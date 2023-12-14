@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "userName": "Eamonn",
+      "userEmail": "eamole@hotmail.com",
+      "userPassword": "bounce",
+      "confirmPassword": "bounce",
+      "id": 0
+    }
+  ]
+}

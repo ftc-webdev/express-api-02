@@ -1,5 +1,19 @@
 const apiKey="duffel_test_Vv4A0ZMBCW92TyRL1EErp2C21CD4AWLBqOs2gCXEjZH"
-const url = "https://api.duffel.com/air/"
+
+// most requests use /air/ endpoint, but /payments/ also an option
+const url = (endpoint = "air") => `https://api.duffel.com/${endpoint}/`
+
+
+const isoDate = (d) => {
+  if (!d) d = new Date()
+  const str = d.toISOString()
+  return str.substring(0, 10)
+} 
+const tmw = (d) => {
+  if (!d) d = new Date()
+  d.setDate(d.getDate() + 1)
+  return isoDate(d)
+}
 
 const simplify = {
   offers (offers) {
@@ -7,12 +21,13 @@ const simplify = {
     // walk across the array simplifying the response objects
     const data = offers.map(offer => {
       
-      let { total_currency, total_amount, 
+      let { id, total_currency, total_amount, 
         slices, owner: airline} = offer 
 
       slices = simplify.slices(slices)
       airline = simplify.airline(airline)
       return {
+        id, 
         total_currency,
         total_amount,
         slices,
@@ -104,7 +119,7 @@ const endpoints = {
 
       const options = getOptions({ body : JSON.stringify(duffelBody)})
       
-      let res = await fetch(`${url}/offer_requests?return_offers=false`, options)
+      let res = await fetch(`${url()}/offer_requests?return_offers=false`, options)
       const offerRequest = await res.json()
       console.log("offer request", offerRequest)
       
@@ -117,7 +132,7 @@ const endpoints = {
     async get (id) {
     
       const options = getOptions({method: "GET"})      
-      const path = `${url}/offers?offer_request_id=${id}&limit=10&sort=total_amount`
+      const path = `${url()}/offers?offer_request_id=${id}&limit=10&sort=total_amount`
       console.log("path", path)
       const res = await fetch(path, options)
       const data = await res.json()
@@ -127,6 +142,67 @@ const endpoints = {
       return offers
     
     }
+
+  },
+  orders: {
+    async get (data) {
+      const duffelData = {
+        data
+      }
+      const options = getOptions({ body : JSON.stringify(duffelData)})      
+      const path = `${url()}/orders`
+      const res = await fetch(path, options)
+      const order = await res.json()
+      // const offers = simplify.offers(data.data)
+      // console.log("offers", data)
+
+      return order
+    
+    }
+  },
+  payment_intents: { // NB: it has its own duffel endpoint /payments/ not /air/
+    async create (data) {  // {amount:###, currency:"GBP" }
+      const duffelData = {
+        data
+      }
+      const options = getOptions({ body : JSON.stringify(duffelData)})      
+      const path = `${url("payments")}/payment_intents`
+      const res = await fetch(path, options)
+      const pi = await res.json()
+
+      return pi
+    
+    },
+    // https://api.duffel.com/payments/payment_intents/pit_00009hthhsUZ8W4LxQgkjo/actions/confirm
+    async create (id) {  // {amount:###, currency:"GBP" }
+      const options = getOptions({ method: "GET" })      
+      const path = `${url("payments")}/payment_intents/${id}/actions/confirm`
+      const res = await fetch(path, options)
+      const pi = await res.json()
+
+      return pi
+    
+    },
+    
+  },
+  
+  /*
+    lets see if we can daisy chain the two above methods
+  */
+  async test (origin, dest) {
+    const body = {
+      sourceAirportCode: origin || "ORK",
+      destinationAirportCode: dest || "LHR",
+      departureDate: tmw(),
+      passengers: [
+        {
+          type: "adult"
+        }
+      ]
+    }
+    const offerRequest = await endpoints.search.get(body)
+    const offers = await endpoints.offers.get(offerRequest.data.id)
+    return offers
   }
 
 }
